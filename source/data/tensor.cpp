@@ -105,6 +105,8 @@ void Tensor<float>::Padding(const std::vector<uint32_t> &pads, float padding_val
   uint32_t pad_cols1 = pads.at(2);  // left
   uint32_t pad_cols2 = pads.at(3);  // right
 
+  //todo 请把代码补充在这里1
+
 }
 
 void Tensor<float>::Fill(float value) {
@@ -122,6 +124,7 @@ void Tensor<float>::Fill(const std::vector<float> &values) {
   const uint32_t planes = rows * cols;
   const uint32_t channels = this->data_.n_slices;
 
+  //todo 请把代码补充在这里2
 }
 
 void Tensor<float>::Show() {
