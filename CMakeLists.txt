@@ -8,6 +8,7 @@ find_package(glog REQUIRED)
 set(link_lib glog pthread gtest)
 set(link_math_lib armadillo blas lapack)
 add_executable(kuiper_course main.cpp)
+set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 target_include_directories(kuiper_course PUBLIC /usr/include/armadillo_bits)
 target_include_directories(kuiper_course PUBLIC ${GTEST_INCLUDE_DIRS})
