@@ -1,4 +1,4 @@
-//
+	//
 // Created by fss on 22-12-16.
 //
 
@@ -25,7 +25,7 @@ class Tensor<float> {
  public:
   explicit Tensor() = default;
 
-  explicit Tensor(uint32_t channels, uint32_t rows, uint32_t cols);
+  explicit Tensor(uint32_t rows, uint32_t cols, uint32_t channels);
 
   Tensor(const Tensor &tensor);
 

@@ -10,6 +10,7 @@
 TEST(test_tensor, create) {
   using namespace kuiper_infer;
   Tensor<float> tensor(3, 32, 32);
+  ASSERT_EQ(tensor.empty(), false);
   ASSERT_EQ(tensor.channels(), 3);
   ASSERT_EQ(tensor.rows(), 32);
   ASSERT_EQ(tensor.cols(), 32);
@@ -18,6 +19,7 @@ TEST(test_tensor, create) {
 TEST(test_tensor, fill) {
   using namespace kuiper_infer;
   Tensor<float> tensor(3, 3, 3);
+  ASSERT_EQ(tensor.empty(), false);
   ASSERT_EQ(tensor.channels(), 3);
   ASSERT_EQ(tensor.rows(), 3);
   ASSERT_EQ(tensor.cols(), 3);
@@ -44,6 +46,7 @@ TEST(test_tensor, fill) {
 TEST(test_tensor, padding1) {
   using namespace kuiper_infer;
   Tensor<float> tensor(3, 3, 3);
+  ASSERT_EQ(tensor.empty(), false);
   ASSERT_EQ(tensor.channels(), 3);
   ASSERT_EQ(tensor.rows(), 3);
   ASSERT_EQ(tensor.cols(), 3);
