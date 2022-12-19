@@ -17,11 +17,12 @@ class Tensor {
 
 template<>
 class Tensor<uint8_t> {
-  // 待实现
+  // 待实现，量化一个张量
 };
 
 template<>
 class Tensor<float> {
+  // 元素都是float
  public:
   explicit Tensor() = default;
 

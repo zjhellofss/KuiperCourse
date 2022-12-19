@@ -123,7 +123,9 @@ void Tensor<float>::Fill(const std::vector<float> &values) {
   const uint32_t cols = this->cols();
   const uint32_t planes = rows * cols;
   const uint32_t channels = this->data_.n_slices;
-
+  // value0 value1 value 2 value3
+  // value4 value5 value6 value7
+  // value8 value9 value10 value1
   //todo 请把代码补充在这里2
 }
 
