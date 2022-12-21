@@ -18,5 +18,7 @@ class Operator {
 
   explicit Operator(OpType op_type);
 };
+
+
 }
 #endif //KUIPER_COURSE_INCLUDE_OPS_OP_HPP_
