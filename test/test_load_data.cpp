@@ -16,6 +16,7 @@ TEST(test_data_load, load_csv1) {
   uint32_t cols = data->cols();
   ASSERT_EQ(rows, 3);
   ASSERT_EQ(cols, 6);
+  LOG(INFO) << "\n" << data->data();
   for (uint32_t r = 0; r < rows; ++r) {
     for (uint32_t c = 0; c < cols; ++c) {
       ASSERT_EQ(data->at(0, r, c), index);
@@ -48,5 +49,4 @@ TEST(test_data_load, load_csv_with_head1) {
       index += 1;
     }
   }
-
 }

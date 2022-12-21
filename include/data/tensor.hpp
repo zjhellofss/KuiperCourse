@@ -11,7 +11,7 @@
 namespace kuiper_infer {
 
 template<typename T>
-class Tensor {
+class Tensor{
 
 };
 
@@ -45,6 +45,8 @@ class Tensor<float> {
   bool empty() const;
 
   float index(uint32_t offset) const;
+
+  float& index(uint32_t offset);
 
   std::vector<uint32_t> shapes() const;
 

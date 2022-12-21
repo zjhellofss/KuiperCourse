@@ -35,8 +35,11 @@ std::shared_ptr<Tensor<float >> CSVDataLoader::LoadDataWithHeader(const std::str
     while (line_stream.good()) {
       std::getline(line_stream, token, split_char);
       try {
-        //todo 补充
+        // todo 补充
         // 能够读取到第一行的csv列名，并存放在headers中
+        // headers.push_back(xx)
+
+        // data.at(row,col) = xxx
         // 能够读取到第二行之后的csv数据，并相应放置在data变量的row，col位置中
       }
       catch (std::exception &e) {
@@ -55,13 +58,14 @@ std::shared_ptr<Tensor<float >> CSVDataLoader::LoadDataWithHeader(const std::str
 
 std::shared_ptr<Tensor<float >> CSVDataLoader::LoadData(const std::string &file_path, char split_char) {
   CHECK(!file_path.empty()) << "File path is empty!";
-  std::ifstream in(file_path);
+  std::ifstream in(file_path); // 打开文件 C++io知识
   CHECK(in.is_open() && in.good()) << "File open failed! " << file_path;
 
   std::string line_str;
   std::stringstream line_stream;
 
   const auto &[rows, cols] = CSVDataLoader::GetMatrixSize(in, split_char);
+  // 知道了多大的csv文件，才能去准备tensor
   std::shared_ptr<Tensor<float>> input_tensor = std::make_shared<Tensor<float>>(1, rows, cols);
   arma::fmat &data = input_tensor->at(0);
 
