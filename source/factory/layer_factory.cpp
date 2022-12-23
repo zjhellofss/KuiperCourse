@@ -15,7 +15,7 @@ void LayerRegisterer::RegisterCreator(OpType op_type, const Creator &creator) {
 
 std::shared_ptr<Layer> LayerRegisterer::CreateLayer(const std::shared_ptr<Operator> &op) {
   CreateRegistry &registry = Registry();
-  const OpType op_type = op->kOpType;
+  const OpType op_type = op->op_type_;
 
   LOG_IF(FATAL, registry.count(op_type) <= 0) << "Can not find the layer type: " << int(op_type);
   const auto &creator = registry.find(op_type)->second;

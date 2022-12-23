@@ -12,9 +12,9 @@ enum class OpType {
 
 class Operator {
  public:
-  OpType kOpType = OpType::kOperatorUnknown;
+  OpType op_type_ = OpType::kOperatorUnknown; //不是一个具体节点 制定为unknown
 
-  virtual ~Operator() = default;
+  virtual ~Operator() = default; //
 
   explicit Operator(OpType op_type);
 };
