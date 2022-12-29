@@ -9,7 +9,7 @@ aux_source_directory(../source/ops DIR_OP)
 aux_source_directory(../source/layer DIR_LAYER)
 aux_source_directory(../source/factory DIR_FAC)
 
-add_executable(test_kuiper_course ${DIR_TEST} ${DIR_DATA} ${DIR_OP} ${DIR_LAYER} ${DIR_FAC})
+add_executable(test_kuiper_course ${DIR_TEST} ${DIR_DATA} ${DIR_OP} ${DIR_LAYER} ${DIR_FAC} ../source/ops/sigmoid_op.cpp ../source/layer/sigmoid_layer.cpp test_sigmoid.cpp)
 
 link_directories(/usr/local/lib/)
 target_link_libraries(test_kuiper_course ${link_lib} ${link_math_lib})

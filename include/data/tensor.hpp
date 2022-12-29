@@ -11,7 +11,7 @@
 namespace kuiper_infer {
 
 template<typename T>
-class Tensor{
+class Tensor {
 
 };
 
@@ -46,7 +46,7 @@ class Tensor<float> {
 
   float index(uint32_t offset) const;
 
-  float& index(uint32_t offset);
+  float &index(uint32_t offset);
 
   std::vector<uint32_t> shapes() const;
 
@@ -76,6 +76,7 @@ class Tensor<float> {
 
   void Flatten();
 
+  std::shared_ptr<Tensor<float>> Clone();
  private:
   std::vector<uint32_t> raw_shapes_;
   arma::fcube data_;

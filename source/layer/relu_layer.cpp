@@ -31,15 +31,17 @@ void ReluLayer::Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inpu
   //x就是inputs y = outputs
   CHECK(this->op_ != nullptr);
   CHECK(this->op_->op_type_ == OpType::kOperatorRelu);
+  CHECK(!inputs.empty());
 
   const uint32_t batch_size = inputs.size(); //一批x，放在vec当中，理解为batchsize数量的tensor，需要进行relu操作
   for (int i = 0; i < batch_size; ++i) {
 
     CHECK(!inputs.at(i)->empty());
     const std::shared_ptr<Tensor<float>> &input_data = inputs.at(i); //取出批次当中的一个张量
+    std::shared_ptr<Tensor<float>> output_data = input_data->Clone();
 
     //对张量中的每一个元素进行运算，进行relu运算
-    input_data->data().transform([&](float value) {
+    output_data->data().transform([&](float value) {
       // 对张良中的没一个元素进行运算
       // 从operator中得到存储的属性
       float thresh = op_->get_thresh();
@@ -53,7 +55,7 @@ void ReluLayer::Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inpu
     });
 
     // 把结果y放在outputs中
-    outputs.push_back(input_data);
+    outputs.push_back(output_data);
   }
 }
 

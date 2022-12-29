@@ -10,7 +10,7 @@
 namespace kuiper_infer {
 class ReluLayer : public Layer {
  public:
-  ~ReluLayer() override = default;
+  ~ReluLayer() = default;
 
   // 通过这里，把relu_op中的thresh告知给relu layer, 因为计算的时候要用到
   explicit ReluLayer(const std::shared_ptr<Operator> &op);
@@ -19,7 +19,6 @@ class ReluLayer : public Layer {
   void Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inputs,
                 std::vector<std::shared_ptr<Tensor<float>>> &outputs) override;
 
-  // 下节的内容，不用管
   static std::shared_ptr<Layer> CreateInstance(const std::shared_ptr<Operator> &op);
 
  private:

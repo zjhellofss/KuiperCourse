@@ -60,7 +60,7 @@ float Tensor<float>::index(uint32_t offset) const {
   return this->data_.at(offset);
 }
 
-float& Tensor<float>::index(uint32_t offset)  {
+float &Tensor<float>::index(uint32_t offset) {
   CHECK(offset < this->data_.size());
   return this->data_.at(offset);
 }
@@ -175,5 +175,9 @@ void Tensor<float>::Rand() {
 void Tensor<float>::Ones() {
   CHECK(!this->data_.empty());
   this->data_.fill(1.);
+}
+
+std::shared_ptr<Tensor<float>> Tensor<float>::Clone() {
+  return std::make_shared<Tensor>(*this);
 }
 }
