@@ -26,10 +26,7 @@ void SigmoidLayer::Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &i
   for (uint32_t i = 0; i < batch_size; ++i) {
     const std::shared_ptr<Tensor<float>> &input_data = inputs.at(i);
     std::shared_ptr<Tensor<float>> output_data = input_data->Clone();
-
-    output_data->data().transform([](const float value) {
-      return 1 / (1 + std::exp(-value));
-    });
+//补充
     outputs.push_back(output_data);
   }
 }
