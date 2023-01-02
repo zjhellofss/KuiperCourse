@@ -6,7 +6,45 @@
 #include "ops/relu_op.hpp"
 #include "layer/relu_layer.hpp"
 #include "factory/layer_factory.hpp"
+// op list
+// conv 1
+// conv 2
+// relu
+// sigmoid
+// linear
+// conv 3
 
+//  有注册机制后的理论调用
+/**
+ * //无论家多少个op
+ * 都只有两句C++
+ * ops:[] = {conv 1,conv 2,relu , sigmod,linear,conv 3}
+ * layers = []
+ * for op in ops:
+ *    layers.append(LayerRegisterer::CreateLayer(op))
+ *    //初始化完毕
+ */
+
+// 如果没有注册机制呢?
+/** 模型多少层,他多少次,这就是意义!
+ *  ops:[] = {conv 1,conv 2,relu , sigmod,linear,conv 3}
+ *  ConvLayer conv1 = std::make_shared(conv1_op);
+ *  ConvLayer conv2 = std::make_shared(conv1_op);
+ *  ReluLayer relu1 = std::make_shared(relu_op);
+ *  SigmoidLayer sig = std::make_shared( sigmod_op);
+ *   SigmoidLayer sig1 = std::make_shared( sigmod_op1);
+     layers.append(conv1)
+     layers.append(conv2)
+     layers.append(relu1)
+     layers.append(sig)
+     layers.append(sig1)
+
+     只是一个四层网络,resnet 几百层
+     不能一个一个写!
+ *
+ */
+
+// 上一节当中 没有注册机制的时候 我们是怎么做的
 TEST(test_layer, forward_relu1) {
   using namespace kuiper_infer;
   float thresh = 0.f;
@@ -29,7 +67,7 @@ TEST(test_layer, forward_relu1) {
 // 一个批次是1
   layer.Forwards(inputs, outputs);
   ASSERT_EQ(outputs.size(), 1);
-
+//记得切换分支!!!!!
   for (int i = 0; i < outputs.size(); ++i) {
     ASSERT_EQ(outputs.at(i)->index(0), 0.f);
     ASSERT_EQ(outputs.at(i)->index(1), 0.f);
@@ -37,6 +75,7 @@ TEST(test_layer, forward_relu1) {
   }
 }
 
+// 有了注册机制后的框架是如何init layer
 TEST(test_layer, forward_relu2) {
   using namespace kuiper_infer;
   float thresh = 0.f;

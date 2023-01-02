@@ -26,7 +26,9 @@ void SigmoidLayer::Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &i
   for (uint32_t i = 0; i < batch_size; ++i) {
     const std::shared_ptr<Tensor<float>> &input_data = inputs.at(i);
     std::shared_ptr<Tensor<float>> output_data = input_data->Clone();
-//补充
+//补充,y=1/(1+e^{-x})
+// 参考relu_layer来
+// 或者有自己的想法也可以
     outputs.push_back(output_data);
   }
 }
@@ -37,7 +39,6 @@ std::shared_ptr<Layer> SigmoidLayer::CreateInstance(const std::shared_ptr<Operat
   std::shared_ptr<Layer> sigmoid_layer = std::make_shared<SigmoidLayer>(op);
   return sigmoid_layer;
 }
-
-LayerRegistererWrapper kSigmoidLayer(OpType::kOperatorSigmoid, SigmoidLayer::CreateInstance);
-
+// OpType::kOperatorRelu 自己替换掉,换成sigmoid对应类型
+//LayerRegistererWrapper kReluLayer1(OpType::kOperatorRelu, SigmoidLayer::CreateInstance);
 }

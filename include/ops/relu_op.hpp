@@ -8,8 +8,6 @@
 namespace kuiper_infer {
 class ReluOperator : public Operator {
  public:
-  ~ReluOperator() override = default;
-
   explicit ReluOperator(float thresh);
 
   void set_thresh(float thresh);

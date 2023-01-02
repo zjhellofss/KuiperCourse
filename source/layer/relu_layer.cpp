@@ -59,10 +59,17 @@ void ReluLayer::Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inpu
   }
 }
 
+// 传入的relu layer create怎么实现
+//  LayerRegistererWrapper kReluLayer1(OpType::kOperatorRelu, ReluLayer::CreateInstance); 注册
+//  查找CreateInstance 得到这个Init方法
+//  根据Init方法来传入op 去初始化Layer
 std::shared_ptr<Layer> ReluLayer::CreateInstance(const std::shared_ptr<Operator> &op) {
+  CHECK(op->op_type_ == OpType::kOperatorRelu);
   std::shared_ptr<Layer> relu_layer = std::make_shared<ReluLayer>(op);
   return relu_layer;
 }
 
+// OpType::kOperatorRelu 就是刚才还说的OpType
+// ReluLayer::CreateInstance就是一个函数指针
 LayerRegistererWrapper kReluLayer(OpType::kOperatorRelu, ReluLayer::CreateInstance);
 }
