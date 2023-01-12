@@ -7,4 +7,5 @@ set(link_math_lib armadillo blas lapack)
 add_executable(test_kuiper_course ${DIR_TEST})
 
 link_directories(/usr/local/lib/)
+link_directories(/usr/local/armadillo/lib)
 target_link_libraries(test_kuiper_course ${link_lib} ${link_math_lib})
