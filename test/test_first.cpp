@@ -28,8 +28,7 @@ TEST(test_first, linear) {
                     "1,1,1;";
 
   arma::fmat output(3, 3);
-  //todo 在此处插入代码，完成output = AxX + bias的运算
-  // output = ?
+  // 根据 aram 对矩阵基础计算的文档
   output = A * X + bias;
 
   const uint32_t cols = 3;
