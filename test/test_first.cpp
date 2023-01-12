@@ -30,6 +30,7 @@ TEST(test_first, linear) {
   arma::fmat output(3, 3);
   //todo 在此处插入代码，完成output = AxX + bias的运算
   // output = ?
+  output = A * X + bias;
 
   const uint32_t cols = 3;
   for (uint32_t c = 0; c < cols; ++c) {
