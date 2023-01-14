@@ -1,7 +1,6 @@
 //
 // Created by fss on 22-12-14.
 //
-#include "data/tensor.hpp"
 #include <gtest/gtest.h>
 #include <armadillo>
 #include <glog/logging.h>
