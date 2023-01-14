@@ -31,9 +31,9 @@ TEST(test_tensor, fill) {
 
   int index = 0;
   for (int c = 0; c < tensor.channels(); ++c) {
-    for (int c_ = 0; c_ < tensor.cols(); ++c_) {
-      for (int r = 0; r < tensor.rows(); ++r) {
-        ASSERT_EQ(values.at(index), tensor.at(c, c_, r));
+    for (int r = 0; r < tensor.rows(); ++r) {
+      for (int c_ = 0; c_ < tensor.cols(); ++c_) {
+        ASSERT_EQ(values.at(index), tensor.at(c, r, c_));
         index += 1;
       }
     }
