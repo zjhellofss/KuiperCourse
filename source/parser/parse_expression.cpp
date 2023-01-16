@@ -145,7 +145,7 @@ std::shared_ptr<TokenNode> ExpressionParser::Generate_(int32_t &index) {
     } else {
       LOG(FATAL) << "Unknown token type: " << int(left_token.token_type);
     }
-
+  //负的都是操作数
     index += 1;
     CHECK(index < this->tokens_.size());
     CHECK(this->tokens_.at(index).token_type == TokenType::TokenRightBracket);
