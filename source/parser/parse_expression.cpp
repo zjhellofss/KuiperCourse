@@ -145,7 +145,7 @@ std::shared_ptr<TokenNode> ExpressionParser::Generate_(int32_t &index) {
     } else {
       LOG(FATAL) << "Unknown token type: " << int(left_token.token_type);
     }
-  //负的都是操作数
+    //负的都是操作数
     index += 1;
     CHECK(index < this->tokens_.size());
     CHECK(this->tokens_.at(index).token_type == TokenType::TokenRightBracket);
@@ -155,8 +155,7 @@ std::shared_ptr<TokenNode> ExpressionParser::Generate_(int32_t &index) {
   }
 }
 
-std::shared_ptr<TokenNode> ExpressionParser::Generate() {
-
+std::vector<std::shared_ptr<TokenNode>> ExpressionParser::Generate() {
   if (this->tokens_.empty()) {
     this->Tokenizer(true);
   }
@@ -165,7 +164,9 @@ std::shared_ptr<TokenNode> ExpressionParser::Generate() {
   CHECK(root != nullptr);
   CHECK(index == tokens_.size() - 1);
 
-  return root;
+  std::vector<std::shared_ptr<TokenNode>> reverse_polish;
+  ReversePolish(root, reverse_polish);
+  return reverse_polish;
 }
 
 TokenNode::TokenNode(int32_t num_index, std::shared_ptr<TokenNode> left, std::shared_ptr<TokenNode> right) :

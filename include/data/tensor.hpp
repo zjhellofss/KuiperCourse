@@ -1,15 +1,14 @@
 //
-// Created by fss on 22-12-16.
+// Created by fss on 22-11-12.
 //
 
-#ifndef KUIPER_COURSE_INCLUDE_TENSOR_HPP_
-#define KUIPER_COURSE_INCLUDE_TENSOR_HPP_
+#ifndef KUIPER_COURSE_DATA_BLOB_HPP_
+#define KUIPER_COURSE_DATA_BLOB_HPP_
 #include <memory>
 #include <vector>
-#include <armadillo>
+#include "armadillo"
 
 namespace kuiper_infer {
-
 template<typename T>
 class Tensor {
 
@@ -17,18 +16,25 @@ class Tensor {
 
 template<>
 class Tensor<uint8_t> {
-  // 待实现，量化一个张量
+  // 待实现
 };
 
 template<>
 class Tensor<float> {
-  // 元素都是float
  public:
   explicit Tensor() = default;
 
   explicit Tensor(uint32_t channels, uint32_t rows, uint32_t cols);
 
+  explicit Tensor(const std::vector<uint32_t> &shapes);
+
+  static std::shared_ptr<Tensor<float>> Create(uint32_t channels, uint32_t rows, uint32_t cols);
+
   Tensor(const Tensor &tensor);
+
+  Tensor(Tensor &&tensor) noexcept;
+
+  Tensor<float> &operator=(Tensor &&tensor) noexcept;
 
   Tensor<float> &operator=(const Tensor &tensor);
 
@@ -49,6 +55,8 @@ class Tensor<float> {
   float &index(uint32_t offset);
 
   std::vector<uint32_t> shapes() const;
+
+  const std::vector<uint32_t> &raw_shapes() const;
 
   arma::fcube &data();
 
@@ -74,12 +82,31 @@ class Tensor<float> {
 
   void Show();
 
+  void ReRawshape(const std::vector<uint32_t> &shapes);
+
+  void ReRawView(const std::vector<uint32_t> &shapes);
+
+  static std::shared_ptr<Tensor<float>> ElementAdd(const std::shared_ptr<Tensor<float>> &tensor1,
+                                                   const std::shared_ptr<Tensor<float>> &tensor2);
+
+  static std::shared_ptr<Tensor<float>> ElementMultiply(const std::shared_ptr<Tensor<float>> &tensor1,
+                                                        const std::shared_ptr<Tensor<float>> &tensor2);
+
   void Flatten();
 
-  std::shared_ptr<Tensor<float>> Clone();
+  void Transform(const std::function<float(float)> &filter);
+
+  std::shared_ptr<Tensor> Clone();
+
+  const float *raw_ptr() const;
+
  private:
-  std::vector<uint32_t> raw_shapes_;
-  arma::fcube data_;
+  void ReView(const std::vector<uint32_t> &shapes);
+  std::vector<uint32_t> raw_shapes_; // 张量数据的实际尺寸大小
+  arma::fcube data_; // 张量数据
 };
+
+using ftensor = Tensor<float>;
 }
-#endif //KUIPER_COURSE_INCLUDE_TENSOR_HPP_
+
+#endif //KUIPER_COURSE_DATA_BLOB_HPP_

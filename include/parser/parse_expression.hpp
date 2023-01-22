@@ -48,7 +48,7 @@ class ExpressionParser {
 
   void Tokenizer(bool need_retoken = false);
 
-  std::shared_ptr<TokenNode> Generate();
+  std::vector<std::shared_ptr<TokenNode>>  Generate();
 
   const std::vector<Token> &tokens() const;
 

@@ -11,7 +11,7 @@ aux_source_directory(../source/factory DIR_FAC)
 aux_source_directory(../source/runtime DIR_RUNTIME)
 aux_source_directory(../source/parser DIR_PARSER)
 
-add_executable(test_kuiper_course ${DIR_TEST} ${DIR_PARSER} ${DIR_RUNTIME} ${DIR_DATA} ${DIR_OP} ${DIR_LAYER} ${DIR_FAC} test_expression.cpp)
+add_executable(test_kuiper_course ${DIR_TEST} ${DIR_PARSER} ${DIR_RUNTIME} ${DIR_DATA} ${DIR_OP} ${DIR_LAYER} ${DIR_FAC})
 
 link_directories(/usr/local/lib/)
 target_link_libraries(test_kuiper_course ${link_lib} ${link_math_lib})

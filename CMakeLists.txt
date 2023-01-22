@@ -10,7 +10,7 @@ set(link_lib glog pthread gtest)
 set(link_math_lib armadillo blas lapack)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
-add_executable(kuiper_course main.cpp)
+add_executable(kuiper_course main.cpp )
 
 target_include_directories(kuiper_course PUBLIC /usr/include/armadillo_bits)
 target_include_directories(kuiper_course PUBLIC ${GTEST_INCLUDE_DIRS})
