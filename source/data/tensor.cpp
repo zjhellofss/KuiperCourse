@@ -7,7 +7,7 @@
 
 namespace kuiper_infer {
 
-Tensor<float>::Tensor(uint32_t channels, uint32_t rows, uint32_t cols) {
+Tensor<float>::Tensor(uint32_t rows, uint32_t cols, uint32_t channels) {
   data_ = arma::fcube(rows, cols, channels);
 }
 
