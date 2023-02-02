@@ -92,6 +92,7 @@ bool RuntimeGraph::Init() {
       // 根据const pnnx::Operator *op 去赋值std::shared_ptr<RuntimeOperator> runtime_operator
       // 先得到pnnx::parameter再根据这个去赋值RuntimeOperator中的RuntimeParameter
       const std::map<std::string, pnnx::Parameter> &params = op->params;
+      // op是pnnx来的，我们需要将pnnx的prams存放到runtime_oprator中
       if (!params.empty()) {
         InitGraphParams(params, runtime_operator);
       }
@@ -146,6 +147,7 @@ void RuntimeGraph::InitOutputOperators(const std::vector<pnnx::Operand *> &outpu
   }
 }
 
+// pnnx的params转换为runtimeoperator runtimeparams 并放在runtimeoprator中
 void RuntimeGraph::InitGraphParams(const std::map<std::string, pnnx::Parameter> &params,
                                    const std::shared_ptr<RuntimeOperator> &runtime_operator) {
   for (const auto &pair : params) {

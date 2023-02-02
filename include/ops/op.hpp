@@ -11,6 +11,7 @@ enum class OpType {
   kOperatorSigmoid = 1,
   kOperatorMaxPooling = 2,
   kOperatorExpression = 3,
+  kOperatorConvolution = 4,
 };
 
 class Operator {

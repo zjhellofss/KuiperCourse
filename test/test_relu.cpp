@@ -28,8 +28,8 @@
 // 如果没有注册机制呢?
 /** 模型多少层,他多少次,这就是意义!
  *  ops:[] = {conv 1,conv 2,relu , sigmod,linear,conv 3}
- *  ConvLayer conv1 = std::make_shared(conv1_op);
- *  ConvLayer conv2 = std::make_shared(conv1_op);
+ *  ConvolutionLayer conv1 = std::make_shared(conv1_op);
+ *  ConvolutionLayer conv2 = std::make_shared(conv1_op);
  *  ReluLayer relu1 = std::make_shared(relu_op);
  *  SigmoidLayer sig = std::make_shared( sigmod_op);
  *   SigmoidLayer sig1 = std::make_shared( sigmod_op1);

@@ -9,6 +9,7 @@ include_directories(./include)
 set(link_lib glog pthread gtest)
 set(link_math_lib armadillo blas lapack)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fopenmp -march=native")
 
 add_executable(kuiper_course main.cpp )
 
