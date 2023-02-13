@@ -261,6 +261,19 @@ bool RuntimeGraph::Init() {
     }
   }
 
+  // 构建图关系
+  for (const auto &current_op : this->operators_) {
+    const std::vector<std::string> &output_names = current_op->output_names;
+    for (const auto &next_op : this->operators_) {
+      if (next_op == current_op) {
+        continue;
+      }
+      if (std::find(output_names.begin(), output_names.end(), next_op->name) !=
+          output_names.end()) {
+        current_op->output_operators.insert({next_op->name, next_op});
+      }
+    }
+  }
   graph_state_ = GraphState::NeedBuild;
   return true;
 }
@@ -400,6 +413,7 @@ void RuntimeGraph::InitGraphAttrs(const std::map<std::string, pnnx::Attribute> &
 }
 
 const std::vector<std::shared_ptr<RuntimeOperator>> RuntimeGraph::operators() const {
+  CHECK(graph_state_ == GraphState::Complete);
   return this->operators_;
 }
 
