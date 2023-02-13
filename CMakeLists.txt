@@ -4,11 +4,14 @@ project(kuiper_course)
 set(CMAKE_CXX_STANDARD 17)
 
 find_package(glog REQUIRED)
+include_directories(./include)
 
 set(link_lib glog pthread gtest)
 set(link_math_lib armadillo blas lapack)
-add_executable(kuiper_course main.cpp)
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fopenmp -march=native")
+
+add_executable(kuiper_course main.cpp )
 
 target_include_directories(kuiper_course PUBLIC /usr/include/armadillo_bits)
 target_include_directories(kuiper_course PUBLIC ${GTEST_INCLUDE_DIRS})
