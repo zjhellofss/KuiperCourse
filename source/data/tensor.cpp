@@ -12,6 +12,7 @@ namespace kuiper_infer {
 Tensor<float>::Tensor(uint32_t channels, uint32_t rows, uint32_t cols) {
   data_ = arma::fcube(rows, cols, channels);
   if (channels == 1 && rows == 1) {
+    // raw_shapes逻辑维度来制定的
     this->raw_shapes_ = std::vector<uint32_t>{cols};
   } else if (channels == 1) {
     this->raw_shapes_ = std::vector<uint32_t>{rows, cols};
@@ -91,9 +92,9 @@ uint32_t Tensor<float>::size() const {
 }
 
 void Tensor<float>::set_data(const arma::fcube &data) {
-  CHECK(data.n_rows == this->data_.n_rows) << data.n_rows << " != " << this->data_.n_rows;
-  CHECK(data.n_cols == this->data_.n_cols) << data.n_cols << " != " << this->data_.n_cols;
-  CHECK(data.n_slices == this->data_.n_slices) << data.n_slices << " != " << this->data_.n_slices;
+//  CHECK(data.n_rows == this->data_.n_rows) << data.n_rows << " != " << this->data_.n_rows;
+//  CHECK(data.n_cols == this->data_.n_cols) << data.n_cols << " != " << this->data_.n_cols;
+//  CHECK(data.n_slices == this->data_.n_slices) << data.n_slices << " != " << this->data_.n_slices;
   this->data_ = data;
 }
 

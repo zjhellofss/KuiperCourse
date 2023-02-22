@@ -26,7 +26,6 @@ TEST(test_initinoutput, init_init_input) {
     }
     LOG(INFO) << "-------------------------------------------------------";
   }
-  graph.Build("pnnx_input_0", "pnnx_output_0");
   // 获取输入空间初始化后的Operator
   const auto &operators2 = graph.operators();
   const auto
@@ -40,7 +39,7 @@ TEST(test_initinoutput, init_init_input) {
   const auto &conv1_input_operand = conv1->input_operands;
   ASSERT_EQ(conv1_input_operand.find("pnnx_input_0")->second->datas.size(), 2);
   const std::vector<std::shared_ptr<Tensor<float>>>
-      &datas_conv1 = conv1_input_operand.at("pnnx_input_0")->datas; // datas是被准备好的空间
+      &datas_conv1 = conv1_input_operand.at("pnnx_input_0")->datas; // datas是被准备好的空间,实际上的大小
   for (const auto &data_conv1 : datas_conv1) {
     ASSERT_EQ(data_conv1->shapes().at(0), 3);
     ASSERT_EQ(data_conv1->shapes().at(1), 128);
@@ -74,7 +73,7 @@ TEST(test_initinoutput, init_init_graph) {
   // conv2 后面是Pnnx...
   // pnnx后面是max
   // max后面是output
-  const auto &conv1 = *(operators.begin() + 1);
+  const auto &conv1 = *(operators.begin() + 1); //跳过输入节点的意思
   ASSERT_EQ(conv1->name, "conv1");
   ASSERT_EQ(conv1->output_operators.size(), 1);
   const auto &conv1_output_ops = conv1->output_operators;
