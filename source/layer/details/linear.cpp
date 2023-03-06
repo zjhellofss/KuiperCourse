@@ -67,6 +67,7 @@ InferStatus LinearLayer::Forward(
 
 #pragma omp parallel for num_threads(batch)
   for (uint32_t i = 0; i < batch; ++i) {
+    // input matmul weight
     const std::shared_ptr<Tensor<float>>& input = inputs.at(i);
     CHECK(input != nullptr && !input->empty())
         << "The input feature map of linear layer is empty";

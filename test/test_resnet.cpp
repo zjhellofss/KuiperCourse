@@ -52,8 +52,9 @@ kuiper_infer::sftensor PreProcessImage(const cv::Mat& image) {
 
 TEST(test_model, resnet) {
   using namespace kuiper_infer;
-  RuntimeGraph graph("tmp/resnet18_batch1.param",
-                     "tmp/resnet18_batch1.pnnx.bin");
+  const std::string& param_path = "tmp/resnet18_batch1.pnnx.param";
+  const std::string& weight_path = "tmp/resnet18_batch1.pnnx.bin";
+  RuntimeGraph graph(param_path, weight_path);
   graph.Build("pnnx_input_0", "pnnx_output_0");
   LOG(INFO) << "Start kuiperInfer inference";
   std::shared_ptr<Tensor<float>> input1 =
@@ -77,7 +78,7 @@ TEST(test_model, resnet) {
 
 TEST(test_model, resnet_classify_demo) {
   using namespace kuiper_infer;
-  std::string path = "./tmp/c.jpeg";
+  std::string path = "./tmp/dog.jpg";
   cv::Mat image = cv::imread(path);
   // 图像预处理
   sftensor input = PreProcessImage(image);

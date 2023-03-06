@@ -80,8 +80,8 @@ void ParamLayer::set_weights(const std::vector<float> &weights) {
   CHECK_EQ(elem_size % batch_size, 0);
   const uint32_t blob_size = elem_size / batch_size;
   for (uint32_t idx = 0; idx < batch_size; ++idx) {
-    const uint32_t start_offset = idx * blob_size;
-    const uint32_t end_offset = start_offset + blob_size;
+    const uint32_t start_offset = idx * blob_size; // 当前卷积核参数的开始位置
+    const uint32_t end_offset = start_offset + blob_size; // 当前卷积核参数的截至位置
     const auto &sub_values = std::vector<float>{weights.begin() + start_offset,
                                                 weights.begin() + end_offset};
     this->weights_.at(idx)->Fill(sub_values);
