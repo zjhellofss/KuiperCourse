@@ -185,13 +185,7 @@ public:
 
     std::map<std::string, Parameter> params;
 
-private:
-    friend class Graph;
-    Operand()
-    {
-    }
 };
-
 
 class Operator
 {
@@ -206,12 +200,6 @@ public:
     std::vector<std::string> inputnames;
     std::map<std::string, Parameter> params;
     std::map<std::string, Attribute> attrs;
-
-private:
-    friend class Graph;
-    Operator()
-    {
-    }
 };
 
 class Graph

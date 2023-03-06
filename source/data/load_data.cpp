@@ -1,73 +1,33 @@
 //
-// Created by fss on 22-12-19.
+// Created by fss on 22-11-21.
 //
 #include "data/load_data.hpp"
+#include <string>
+#include <fstream>
+#include <armadillo>
+#include <utility>
 #include <glog/logging.h>
 
 namespace kuiper_infer {
-std::shared_ptr<Tensor<float >> CSVDataLoader::LoadDataWithHeader(const std::string &file_path,
-                                                                  std::vector<std::string> &headers,
-                                                                  char split_char) {
-  CHECK(!file_path.empty()) << "File path is empty!";
-  std::ifstream in(file_path);
-  CHECK(in.is_open() && in.good()) << "File open failed! " << file_path;
 
-  std::string line_str;
-  std::stringstream line_stream;
-
-  const auto &[rows, cols] = CSVDataLoader::GetMatrixSize(in, split_char);
-  CHECK(rows >= 1);
-  std::shared_ptr<Tensor<float>> input_tensor = std::make_shared<Tensor<float>>(1, rows - 1, cols);
-  arma::fmat &data = input_tensor->at(0);
-
-  size_t row = 0;
-  while (in.good()) {
-    std::getline(in, line_str);
-    if (line_str.empty()) {
-      break;
-    }
-
-    std::string token;
-    line_stream.clear();
-    line_stream.str(line_str);
-
-    size_t col = 0;
-    while (line_stream.good()) {
-      std::getline(line_stream, token, split_char);
-      try {
-        // todo 补充
-        // 能够读取到第一行的csv列名，并存放在headers中
-        // headers.push_back(xx)
-
-        // data.at(row,col) = xxx
-        // 能够读取到第二行之后的csv数据，并相应放置在data变量的row，col位置中
-      }
-      catch (std::exception &e) {
-        LOG(ERROR) << "Parse CSV File meet error: " << e.what();
-        continue;
-      }
-      col += 1;
-      CHECK(col <= cols) << "There are excessive elements on the column";
-    }
-
-    row += 1;
-    CHECK(row <= rows) << "There are excessive elements on the row";
+arma::fmat CSVDataLoader::LoadData(const std::string &file_path, const char split_char) {
+  arma::fmat data;
+  if (file_path.empty()) {
+    LOG(ERROR) << "CSV file path is empty: " << file_path;
+    return data;
   }
-  return input_tensor;
-}
 
-std::shared_ptr<Tensor<float >> CSVDataLoader::LoadData(const std::string &file_path, char split_char) {
-  CHECK(!file_path.empty()) << "File path is empty!";
-  std::ifstream in(file_path); // 打开文件 C++io知识
-  CHECK(in.is_open() && in.good()) << "File open failed! " << file_path;
+  std::ifstream in(file_path);
+  if (!in.is_open() || !in.good()) {
+    LOG(ERROR) << "File open failed: " << file_path;
+    return data;
+  }
 
   std::string line_str;
   std::stringstream line_stream;
 
   const auto &[rows, cols] = CSVDataLoader::GetMatrixSize(in, split_char);
-  // 知道了多大的csv文件，才能去准备tensor
-  std::shared_ptr<Tensor<float>> input_tensor = std::make_shared<Tensor<float>>(1, rows, cols);
-  arma::fmat &data = input_tensor->at(0);
+  data.zeros(rows, cols);
 
   size_t row = 0;
   while (in.good()) {
@@ -87,8 +47,7 @@ std::shared_ptr<Tensor<float >> CSVDataLoader::LoadData(const std::string &file_
         data.at(row, col) = std::stof(token);
       }
       catch (std::exception &e) {
-        LOG(ERROR) << "Parse CSV File meet error: " << e.what();
-        continue;
+        DLOG(ERROR) << "Parse CSV File meet error: " << e.what() << " row:" << row << " col:" << col;
       }
       col += 1;
       CHECK(col <= cols) << "There are excessive elements on the column";
@@ -97,7 +56,7 @@ std::shared_ptr<Tensor<float >> CSVDataLoader::LoadData(const std::string &file_
     row += 1;
     CHECK(row <= rows) << "There are excessive elements on the row";
   }
-  return input_tensor;
+  return data;
 }
 
 std::pair<size_t, size_t> CSVDataLoader::GetMatrixSize(std::ifstream &file, char split_char) {
