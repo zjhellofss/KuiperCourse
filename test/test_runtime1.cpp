@@ -12,6 +12,7 @@ TEST(test_runtime, runtime1) {
   const std::string &bin_path = "./tmp/test.pnnx.bin";
   RuntimeGraph graph(param_path, bin_path);
   graph.Init();
+  graph.Build("pnnx_input_0", "pnnx_output_0");
   const auto operators = graph.operators();
   for (const auto &operator_ : operators) {
     LOG(INFO) << "type: " << operator_->type << " name: " << operator_->name;
