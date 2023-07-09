@@ -1,0 +1,5 @@
+Log file created at: 2023/07/09 21:55:40
+Running on machine: lhl
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+F20230709 21:55:40.765772 98218 load_data.cpp:71] Check failed: in.is_open() && in.good() File open failed! ../tmp/data1.csv
