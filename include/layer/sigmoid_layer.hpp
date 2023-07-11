@@ -8,20 +8,19 @@
 #include "ops/op.hpp"
 #include "ops/sigmoid_op.hpp"
 
-namespace kuiper_infer {
-class SigmoidLayer : public Layer {
- public:
-  ~SigmoidLayer() = default;
+namespace kuiper_infer
+{
+  class SigmoidLayer : public Layer
+  {
+  public:
+    ~SigmoidLayer() = default;
+    explicit SigmoidLayer(const std::shared_ptr<Operator> &op);
+    void Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inputs,
+                  std::vector<std::shared_ptr<Tensor<float>>> &outputs) override;
+    static std::shared_ptr<Layer> CreateInstance(const std::shared_ptr<Operator> &op);
 
-  explicit SigmoidLayer(const std::shared_ptr<Operator> &op);
-
-  void Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inputs,
-                std::vector<std::shared_ptr<Tensor<float>>> &outputs) override;
-
-  static std::shared_ptr<Layer> CreateInstance(const std::shared_ptr<Operator> &op);
-
- private:
-  std::unique_ptr<SigmoidOperator> op_;
-};
+  private:
+    std::unique_ptr<SigmoidOperator> op_;
+  };
 }
-#endif //KUIPER_COURSE_INCLUDE_LAYER_SIGMOID_LAYER_HPP_
+#endif // KUIPER_COURSE_INCLUDE_LAYER_SIGMOID_LAYER_HPP_

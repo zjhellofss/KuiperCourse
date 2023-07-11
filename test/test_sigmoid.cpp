@@ -8,7 +8,8 @@
 #include "layer/sigmoid_layer.hpp"
 #include "factory/layer_factory.hpp"
 
-TEST(test_layer, forward_sigmoid) {
+TEST(test_layer, forward_sigmoid)
+{
   using namespace kuiper_infer;
   std::shared_ptr<Operator> sigmoid_op = std::make_shared<SigmoidOperator>();
   std::shared_ptr<Layer> sigmoid_layer = LayerRegisterer::CreateLayer(sigmoid_op);
@@ -25,9 +26,16 @@ TEST(test_layer, forward_sigmoid) {
   ASSERT_EQ(outputs.size(), 1); // 测试1
 
   ASSERT_EQ(outputs.size(), 1);
-  for (int i = 0; i < outputs.size(); ++i) {
+  for (int i = 0; i < outputs.size(); ++i)
+  {
     float a = input->index(0);
-    ASSERT_EQ(outputs.at(i)->index(0), 1 / (1 + std::exp(-a)) );
+    std::cout << outputs.at(i)->index(0) << std::endl;
+    std::cout << 1 / (1 + std::exp(-a)) << std::endl;
+    std::cout << outputs.at(i)->index(1) << std::endl;
+    std::cout << 1 / (1 + std::exp(-input->index(1))) << std::endl;
+    std::cout << outputs.at(i)->index(2) << std::endl;
+    std::cout << 1 / (1 + std::exp(-input->index(2))) << std::endl;
+    ASSERT_EQ(outputs.at(i)->index(0), 1 / (1 + std::exp(-a)));
     ASSERT_EQ(outputs.at(i)->index(1), 1 / (1 + std::exp(-input->index(1))));
     ASSERT_EQ(outputs.at(i)->index(2), 1 / (1 + std::exp(-input->index(2))));
   }

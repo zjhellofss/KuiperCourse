@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file,CMakeFiles/kuiper_course.dir/link.d CMakeFiles/kuiper_course.dir/main.cpp.o -o /home/jasmine/prj/KuiperCourse_1/bin/kuiper_course  -lglog -lpthread -lgtest -larmadillo -lblas -llapack 

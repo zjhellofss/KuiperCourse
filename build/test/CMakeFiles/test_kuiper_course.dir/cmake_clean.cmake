@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "/home/jasmine/prj/KuiperCourse_1/bin/test_kuiper_course"
+  "/home/jasmine/prj/KuiperCourse_1/bin/test_kuiper_course.pdb"
+  "CMakeFiles/test_kuiper_course.dir/link.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/data/load_data.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/data/load_data.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/data/tensor.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/data/tensor.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/factory/layer_factory.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/factory/layer_factory.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/layer/layer.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/layer/layer.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/layer/relu_layer.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/layer/relu_layer.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/layer/sigmoid_layer.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/layer/sigmoid_layer.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/ops/op.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/ops/op.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/ops/relu_op.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/ops/relu_op.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/__/source/ops/sigmoid_op.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/__/source/ops/sigmoid_op.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/test_first.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/test_first.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/test_load_data.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/test_load_data.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/test_main.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/test_main.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/test_relu.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/test_relu.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/test_sigmoid.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/test_sigmoid.cpp.o.d"
+  "CMakeFiles/test_kuiper_course.dir/test_tensor.cpp.o"
+  "CMakeFiles/test_kuiper_course.dir/test_tensor.cpp.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/test_kuiper_course.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()
