@@ -6,11 +6,12 @@
 #define KUIPER_COURSE_INCLUDE_OPS_SIGMOID_OP_HPP_
 #include "op.hpp"
 #include "layer/layer.hpp"
-namespace kuiper_infer {
-class SigmoidOperator : public Operator {
- public:
-  explicit SigmoidOperator();
-
-};
+namespace kuiper_infer
+{
+  class SigmoidOperator : public Operator
+  {
+  public:
+    explicit SigmoidOperator();
+  };
 }
-#endif //KUIPER_COURSE_INCLUDE_OPS_SIGMOID_OP_HPP_
+#endif // KUIPER_COURSE_INCLUDE_OPS_SIGMOID_OP_HPP_
