@@ -6,19 +6,20 @@
 #define KUIPER_COURSE_INCLUDE_LAYER_LAYER_HPP_
 #include <string>
 #include "data/tensor.hpp"
-namespace kuiper_infer {
-class Layer {
- public:
-  explicit Layer(const std::string &layer_name);
+namespace kuiper_infer
+{
+  class Layer
+  {
+  public:
+    explicit Layer(const std::string &layer_name);
+    // 算子执行接口
+    virtual void Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inputs,
+                          std::vector<std::shared_ptr<Tensor<float>>> &outputs);
+    virtual ~Layer() = default;
 
-  virtual void Forwards(const std::vector<std::shared_ptr<Tensor<float>>> &inputs,
-                        std::vector<std::shared_ptr<Tensor<float>>> &outputs);
-  // reluLayer中 inputs 等于 x , outputs 等于 y= x，if x>0
-  // 计算得到的结果放在y当中，x是输入，放在inputs中
-
-  virtual ~Layer() = default;
- private:
-  std::string layer_name_; //relu layer "relu"
-};
+  private:
+    // 存储算子类型
+    std::string layer_name_; // relu layer "relu"
+  };
 }
-#endif //KUIPER_COURSE_INCLUDE_LAYER_LAYER_HPP_
+#endif // KUIPER_COURSE_INCLUDE_LAYER_LAYER_HPP_
